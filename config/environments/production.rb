@@ -30,18 +30,18 @@ Discourse::Application.configure do
 
   # you may use other configuration here for mail eg: sendgrid
 
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   :address              => "smtp.sendgrid.net",
-  #   :port                 => 587,
-  #   :domain               => 'YOUR DOMAIN',
-  #   :user_name            => 'YOUR_USER',
-  #   :password             => 'YOUR_PASSWORD',
-  #   :authentication       => 'plain',
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.smtp_settings = {
+     :address              => "smtp.mandrillapp.com",
+     :port                 => 587,
+     :user_name            => ENV['MANDRILL_USERNAME'],
+     :password             => ENV['MANDRILL_APIKEY'],
+     :domain               => 'heroku.com',
+     :authentication       => 'plain'}
   #   :enable_starttls_auto => true  }
 
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.sendmail_settings = {arguments: '-i'}
+  #config.action_mailer.delivery_method = :sendmail
+  #config.action_mailer.sendmail_settings = {arguments: '-i'}
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify

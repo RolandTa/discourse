@@ -41,6 +41,8 @@ module Discourse
 
     config.assets.paths += %W(#{config.root}/config/locales)
 
+    config.assets.initialize_on_precompile = false
+
     config.assets.precompile += ['admin.js', 'admin.css', 'shiny/shiny.css', 'preload_store.js', 'jquery.js']
 
     # Precompile all defer
