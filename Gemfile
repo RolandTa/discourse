@@ -149,6 +149,9 @@ gem 'rack-cache', require: false
 gem 'rack-cors', require: false
 gem 'unicorn', require: false
 
+# autoscale
+gem 'autoscaler', require: false
+
 # perftools only works on 1.9 atm
 group :profile do
   # travis refuses to install this, instead of fuffing, just avoid it for now
