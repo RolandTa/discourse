@@ -88,7 +88,7 @@ group :assets do
   gem 'sass-rails'
   gem 'turbo-sprockets-rails3'
   gem 'uglifier'
-  #gem 'asset_sync'
+  gem 'asset_sync'
 end
 
 group :test do
