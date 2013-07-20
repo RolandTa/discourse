@@ -64,6 +64,6 @@ Discourse::Application.configure do
 
   # Discourse strongly recommend you use a CDN.
   # For origin pull cdns all you need to do is register an account and configure
-  # config.action_controller.asset_host = "http://YOUR_CDN_HERE"
+  config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
 
 end
