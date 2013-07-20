@@ -27,7 +27,6 @@ Discourse::Application.configure do
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
 
-
   # you may use other configuration here for mail eg: sendgrid
 
    config.action_mailer.delivery_method = :smtp
