@@ -87,3 +87,9 @@ config/version.rb
 .ruby-version
 .ruby-gemset
 .rbenv
+
+
+# ignore heroku
+heroku.pub
+heroku
+Gemfile.lock
