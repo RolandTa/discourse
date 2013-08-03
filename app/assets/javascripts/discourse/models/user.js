@@ -9,6 +9,16 @@
 Discourse.User = Discourse.Model.extend({
 
   /**
+    The user's stream
+
+    @property stream
+    @type {Discourse.UserStream}
+  **/
+  stream: function() {
+    return Discourse.UserStream.create({ user: this });
+  }.property(),
+
+  /**
     Is this user a member of staff?
 
     @property staff
@@ -32,9 +42,9 @@ Discourse.User = Discourse.Model.extend({
     @property avatarSmall
     @type {String}
   **/
-  avatarSmall: (function() {
+  avatarSmall: function() {
     return Discourse.Utilities.avatarUrl(this.get('username'), 'small', this.get('avatar_template'));
-  }).property('username'),
+  }.property('username'),
 
   searchContext: function() {
     return ({ type: 'user', id: this.get('username_lower'), user: this });
@@ -249,6 +259,7 @@ Discourse.User = Discourse.Model.extend({
 
   findDetails: function() {
     var user = this;
+
     return PreloadStore.getAndRemove("user_" + user.get('username'), function() {
       return Discourse.ajax("/users/" + user.get('username') + '.json');
     }).then(function (json) {
@@ -264,29 +275,10 @@ Discourse.User = Discourse.Model.extend({
         json.user.invited_by = Discourse.User.create(json.user.invited_by);
       }
 
+
       user.setProperties(json.user);
       return user;
     });
-  },
-
-  findStream: function(filter) {
-
-    // When filtering for replies, include mentions and quotes too
-    if (filter === Discourse.UserAction.TYPES.replies) {
-      filter = [Discourse.UserAction.TYPES.replies,
-                Discourse.UserAction.TYPES.mentions,
-                Discourse.UserAction.TYPES.quotes].join(",");
-    }
-
-    var stream = Discourse.UserStream.create({
-      itemsLoaded: 0,
-      content: [],
-      filter: filter,
-      user: this
-    });
-
-    stream.findItems();
-    return stream;
   }
 
 });
@@ -309,7 +301,7 @@ Discourse.User.reopenClass({
     }
 
     // If we found the current user
-    if (this.currentUser && property) {
+    if (this.currentUser && (typeof property !== "undefined")) {
       return this.currentUser.get(property);
     }
 
@@ -339,9 +331,9 @@ Discourse.User.reopenClass({
     @param {String} username A username to check
     @param {String} email An email address to check
   **/
-  checkUsername: function(username, email) {
+  checkUsername: function(username, email, forUserId) {
     return Discourse.ajax('/users/check_username', {
-      data: { username: username, email: email }
+      data: { username: username, email: email, for_user_id: forUserId }
     });
   },
 
