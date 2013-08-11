@@ -5,9 +5,15 @@
 # http://yamllint.com/
 
 de:
+  dates:
+    short_date_no_year: "D MMM"
+    short_date: "D MMM, YYYY"
+    long_date: "MMMM D, YYYY h:mma"
   time:
     formats:
       short: "%d. %m. %Y"
+      short_no_year: "%d. %m."
+      date_only: "%b %-d, %Y"
 
   title: "Discourse"
   topics: "Themen"
