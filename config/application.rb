@@ -121,22 +121,14 @@ module Discourse
     # attr_accessible.
     config.active_record.whitelist_attributes = false
 
+    unless Rails.env.test?
+      require 'plugin'
+      Discourse.activate_plugins!
+    end
+
     # So open id logs somewhere sane
     config.after_initialize do
       OpenID::Util.logger = Rails.logger
-<<<<<<< HEAD
-
-      if ENV['EMBED_CLOCKWORK']
-        puts ">> Running clockwork in background thread"
-        require_relative "clock"
-
-        Thread.new do
-          Clockwork.run
-        end
-      end
-
-=======
->>>>>>> 663adde90e1a3b1d23bf698271fd6ba77c7281a1
     end
 
 
