@@ -124,6 +124,7 @@ module Discourse
     # So open id logs somewhere sane
     config.after_initialize do
       OpenID::Util.logger = Rails.logger
+<<<<<<< HEAD
 
       if ENV['EMBED_CLOCKWORK']
         puts ">> Running clockwork in background thread"
@@ -134,6 +135,8 @@ module Discourse
         end
       end
 
+=======
+>>>>>>> 663adde90e1a3b1d23bf698271fd6ba77c7281a1
     end
 
 

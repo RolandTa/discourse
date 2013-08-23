@@ -45,6 +45,7 @@ class SiteSetting < ActiveRecord::Base
   client_setting(:email_domains_blacklist, 'mailinator.com')
   client_setting(:email_domains_whitelist)
   client_setting(:version_checks, true)
+  setting(:new_version_emails, true)
   client_setting(:min_title_similar_length, 10)
   client_setting(:min_body_similar_length, 15)
   # cf. https://github.com/discourse/discourse/pull/462#issuecomment-14991562
@@ -66,6 +67,7 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:num_flags_to_block_new_user, 3)
   setting(:num_users_to_block_new_user, 3)
+  setting(:notify_mods_when_user_blocked, true)
 
   # used mainly for dev, force hostname for Discourse.base_url
   # You would usually use multisite for this
@@ -87,6 +89,7 @@ class SiteSetting < ActiveRecord::Base
   setting(:apple_touch_icon_url, '/assets/default-apple-touch-icon.png')
 
   setting(:ninja_edit_window, 5.minutes.to_i)
+  client_setting(:edit_history_visible_to_public, true)
   client_setting(:delete_removed_posts_after, 24) # hours
   setting(:post_undo_action_window_mins, 10)
   setting(:system_username, '')
@@ -236,9 +239,12 @@ class SiteSetting < ActiveRecord::Base
 
   client_setting(:relative_date_duration, 14)
 
-  client_setting(:delete_user_max_age, 7)
+  client_setting(:delete_user_max_age, 14)
   setting(:delete_all_posts_max, 10)
 
+  setting(:username_change_period, 3) # days
+
+  client_setting(:allow_uploaded_avatars, true)
 
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)

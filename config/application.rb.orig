@@ -41,13 +41,9 @@ module Discourse
 
     config.assets.paths += %W(#{config.root}/config/locales)
 
-<<<<<<< HEAD
     config.assets.initialize_on_precompile = false
 
     config.assets.precompile += ['admin.js', 'admin.css', 'shiny/shiny.css', 'preload_store.js', 'jquery.js']
-=======
-    config.assets.precompile += ['admin.js', 'admin.css', 'shiny/shiny.css', 'preload_store.js']
->>>>>>> upstream/master
 
     # Precompile all defer
     Dir.glob("#{config.root}/app/assets/javascripts/defer/*.js").each do |file|
@@ -125,14 +121,10 @@ module Discourse
     # attr_accessible.
     config.active_record.whitelist_attributes = false
 
-    unless Rails.env.test?
-      require 'plugin'
-      Discourse.activate_plugins!
-    end
-
     # So open id logs somewhere sane
     config.after_initialize do
       OpenID::Util.logger = Rails.logger
+<<<<<<< HEAD
 
       if ENV['EMBED_CLOCKWORK']
         puts ">> Running clockwork in background thread"
@@ -142,6 +134,11 @@ module Discourse
           Clockwork.run
         end
       end
+
+=======
+>>>>>>> 663adde90e1a3b1d23bf698271fd6ba77c7281a1
     end
+
+
   end
 end
